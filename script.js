@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- State Management ---
     let isListening = false;
     let audioContext, analyser, source, dataArray, animationFrameId, recognition;
-    const GEMINI_API_KEY = ""; 
+    const GEMINI_API_KEY = "AIzaSyCqpMtSAUqg464NM7zP-Acpr4vImSxp0oM"; 
     const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
     let chatHistory = [];
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
