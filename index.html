@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J.A.R.V.I.S. Virtual Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <div id="permission-modal" class="modal-overlay active">
+        <div class="modal-content">
+            <h2>Microphone Access Required</h2>
+            <p>J.A.R.V.I.S. requires access to your microphone to listen for voice commands. Your privacy is respected, and audio is only processed when you activate the assistant.</p>
+            <div class="modal-buttons"><button id="allow-mic">Allow</button></div>
+        </div>
+    </div>
+
+    <div id="logins-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-btn" data-target="logins-modal">×</button>
+            <h2>Recent Logins</h2>
+            <ul id="logins-list">
+                <li>Mon, Jul 21 2025, 01:50 AM - Hyderabad, IN</li>
+                <li>Sun, Jul 20 2025, 10:30 PM - Hyderabad, IN</li>
+                <li>Sat, Jul 19 2025, 05:15 PM - Hyderabad, IN</li>
+                <li>Fri, Jul 18 2025, 09:00 AM - Hyderabad, IN</li>
+                <li>Thu, Jul 17 2025, 11:00 PM - Hyderabad, IN</li>
+                <li>Wed, Jul 16 2025, 02:20 PM - Hyderabad, IN</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="jarvis-header">
+            <div class="jarvis-title">J.A.R.V.I.S</div>
+            <div class="jarvis-subtitle">VOICE OF ARTIFICIAL INTELLIGENCE</div>
+        </div>
+        <div class="jarvis-orb-container">
+            <div class="animated-orb-ring ring1"></div>
+            <div class="animated-orb-ring ring2"></div>
+            <canvas id="audio-visualizer-canvas"></canvas>
+        </div>
+        <div class="controls-container">
+            <button id="startButton" disabled>Activate</button>
+            <div id="status" class="status-display">Awaiting microphone permission...</div>
+            <form id="text-command-form">
+                <input type="text" id="text-input" placeholder="Or type a command..." autocomplete="off">
+                <button type="submit" id="text-submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="settings-button">
+        <svg viewBox="0 0 24 24"><path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.44,0.17-0.48,0.41L9.22,5.25C8.63,5.5,8.1,5.82,7.6,6.2L5.21,5.23C5,5.16,4.75,5.23,4.63,5.44l-1.92,3.32 c-0.12,0.22-0.07,0.47,0.12,0.61L4.86,11c-0.05,0.32-0.07,0.63-0.07,0.94s0.02,0.62,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.38,2.44 c0.04,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17-0.48-0.41l0.38-2.44c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0.01,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"></path></svg>
+    </div>
+
+    <div id="settings-panel" class="panel">
+        <h3>Settings</h3>
+        <div class="settings-item">
+            <label for="theme-toggle">Light Mode</label>
+            <label class="toggle-switch"><input type="checkbox" id="theme-toggle"><span class="slider"></span></label>
+        </div>
+        <div class="settings-item"><label for="language-select">Language</label><select id="language-select"></select></div>
+        <div class="settings-item"><button id="logins-btn" class="btn">Recent Logins</button></div>
+    </div>
+
+    <aside id="sidebar-panel" class="sidebar">
+        <div class="sidebar-section"><h3>System Info</h3><div id="info-display"></div></div>
+        <div class="sidebar-section"><h3>Response</h3><div id="result-display"></div></div>
+        <div class="sidebar-section"><h3>Suggestions</h3><div id="suggestions-container"></div></div>
+    </aside>
+
+    <div id="log-panel" class="conversation-log"><h3>Conversation Log</h3><div id="logContent"></div></div>
+    
+    <div id="mobile-toggles">
+        <button id="toggle-log-btn">Log</button>
+        <button id="toggle-sidebar-btn">Info</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
